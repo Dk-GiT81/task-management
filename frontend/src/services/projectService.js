@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000/projects";
+const API_URL = `${import.meta.env.VITE_API_URL}/projects`;
 
 function getToken() {
   return localStorage.getItem("access_token");

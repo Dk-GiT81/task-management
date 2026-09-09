@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000/dashboard";
+const API_URL = `${import.meta.env.VITE_API_URL}/dashboard`;
 
 function getToken() {
   return localStorage.getItem("access_token");
@@ -14,7 +14,9 @@ export async function getDashboardStats() {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.detail || "Failed to fetch dashboard stats");
+    throw new Error(
+      data.detail || "Failed to fetch dashboard stats"
+    );
   }
 
   return data;

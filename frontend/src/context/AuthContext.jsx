@@ -5,9 +5,9 @@ import {
   useState,
 } from "react";
 
-
 const AuthContext = createContext(null);
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(
@@ -17,7 +17,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const [loading, setLoading] = useState(true);
-
 
   /*
    * Restore session when application starts
@@ -34,7 +33,7 @@ export function AuthProvider({ children }) {
 
       try {
         const response = await fetch(
-          "http://localhost:8000/auth/me",
+          `${API_URL}/auth/me`,
           {
             headers: {
               Authorization: `Bearer ${storedToken}`,
@@ -63,13 +62,12 @@ export function AuthProvider({ children }) {
     restoreSession();
   }, []);
 
-
   /*
    * Register
    */
   async function register(name, email, password) {
     const response = await fetch(
-      "http://localhost:8000/auth/register",
+      `${API_URL}/auth/register`,
       {
         method: "POST",
 
@@ -96,13 +94,12 @@ export function AuthProvider({ children }) {
     return data;
   }
 
-
   /*
    * Login
    */
   async function login(email, password) {
     const response = await fetch(
-      "http://localhost:8000/auth/login",
+      `${API_URL}/auth/login`,
       {
         method: "POST",
 
@@ -136,7 +133,7 @@ export function AuthProvider({ children }) {
      * Get logged-in user's information
      */
     const userResponse = await fetch(
-      "http://localhost:8000/auth/me",
+      `${API_URL}/auth/me`,
       {
         headers: {
           Authorization: `Bearer ${data.access_token}`,
@@ -157,7 +154,6 @@ export function AuthProvider({ children }) {
     return data;
   }
 
-
   /*
    * Logout
    */
@@ -167,7 +163,6 @@ export function AuthProvider({ children }) {
     setToken(null);
     setUser(null);
   }
-
 
   const value = {
     token,
@@ -179,14 +174,12 @@ export function AuthProvider({ children }) {
     isAuthenticated: Boolean(token),
   };
 
-
   return (
     <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
 }
-
 
 /*
  * Custom hook
