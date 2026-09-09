@@ -11,19 +11,10 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Projects from "./pages/Projects";
+import Home from "./pages/Home";
 
 import DashboardLayout from "./layouts/DashboardLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
-
-
-
-function Home() {
-  return (
-    <div>
-      <h1>Task Management App</h1>
-    </div>
-  );
-}
 
 
 function PlaceholderPage({ title }) {
