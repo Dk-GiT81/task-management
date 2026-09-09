@@ -3510,3 +3510,746 @@ a {
     gap: 8px;
   }
 }
+
+/* =========================================
+   SIDEBAR COLLAPSE - DESKTOP
+========================================= */
+
+.sidebar {
+  width: 250px;
+  transition: width 0.3s ease;
+  z-index: 100;
+}
+
+.app-main {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+
+  transition:
+    margin-left 0.3s ease,
+    width 0.3s ease;
+}
+
+
+/* =========================================
+   COLLAPSE BUTTON
+========================================= */
+
+
+.sidebar-toggle:hover {
+  background: #ffffff;
+}
+
+
+/* =========================================
+   COLLAPSED SIDEBAR
+========================================= */
+
+.sidebar.sidebar-collapsed {
+  width: 76px;
+}
+
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.sidebar-logo {
+  overflow: hidden;
+  white-space: nowrap;
+
+  transition:
+    padding 0.3s ease,
+    margin 0.3s ease;
+}
+
+.sidebar-logo > div:last-child {
+  overflow: hidden;
+
+  opacity: 1;
+  max-width: 180px;
+
+  transition:
+    opacity 0.2s ease,
+    max-width 0.3s ease;
+}
+
+.sidebar.sidebar-collapsed .sidebar-logo {
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar.sidebar-collapsed .sidebar-logo > div:last-child {
+  opacity: 0;
+  max-width: 0;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.sidebar-link {
+  overflow: hidden;
+
+  transition:
+    padding 0.3s ease,
+    gap 0.3s ease,
+    background 0.2s ease;
+}
+
+.sidebar.sidebar-collapsed .sidebar-link {
+  justify-content: center;
+
+  padding-left: 0;
+  padding-right: 0;
+
+  gap: 0;
+}
+
+.sidebar.sidebar-collapsed .sidebar-link span:not(.sidebar-icon) {
+  width: 0;
+  opacity: 0;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   ICONS
+========================================= */
+
+.sidebar-icon {
+  min-width: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.3s ease;
+}
+
+.sidebar.sidebar-collapsed .sidebar-icon {
+  min-width: 22px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.sidebar.sidebar-collapsed .sidebar-version {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+/* =========================================
+   COLLAPSED TOGGLE
+========================================= */
+
+
+
+.sidebar.sidebar-collapsed .sidebar-toggle:hover {
+  transform: rotate(180deg) scale(1.05);
+}
+
+
+/* =========================================
+   IMPORTANT: DESKTOP RESPONSIVE
+========================================= */
+
+@media (min-width: 901px) {
+
+  .sidebar {
+    width: 250px;
+  }
+
+  .sidebar.sidebar-collapsed {
+    width: 76px;
+  }
+
+  .app-main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
+
+  .sidebar.sidebar-collapsed ~ .app-main {
+    margin-left: 76px;
+    width: calc(100% - 76px);
+  }
+}
+
+/* =========================================================
+   TASKFLOW SIDEBAR - FINAL VERSION
+   ========================================================= */
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 28px 18px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.58),
+      rgba(237, 232, 255, 0.45)
+    );
+
+  border-right: 1px solid rgba(255, 255, 255, 0.72);
+
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  box-shadow:
+    8px 0 30px rgba(88, 70, 160, 0.04);
+
+  z-index: 100;
+
+  transition:
+    width 0.3s ease,
+    min-width 0.3s ease,
+    padding 0.3s ease;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.app-main {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+
+  transition:
+    margin-left 0.3s ease,
+    width 0.3s ease;
+}
+
+
+/* =========================================================
+   LOGO AREA
+   ========================================================= */
+
+.sidebar-logo-wrapper {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 42px;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+}
+
+
+/* Logo button */
+
+.sidebar-logo-button {
+  flex-shrink: 0;
+
+  width: 46px;
+  height: 46px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 14px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sidebar-logo-button:hover {
+  transform: scale(1.05);
+
+  background:
+    rgba(255, 255, 255, 0.55);
+
+  box-shadow:
+    0 8px 20px rgba(88, 70, 160, 0.08);
+}
+
+.sidebar-logo-button:active {
+  transform: scale(0.98);
+}
+
+
+/* TaskFlow icon */
+
+.sidebar-logo-icon {
+  width: 42px;
+  height: 42px;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+
+/* Logo text */
+
+.sidebar-logo-text {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  opacity: 1;
+  max-width: 180px;
+
+  transition:
+    opacity 0.2s ease,
+    max-width 0.3s ease;
+}
+
+.sidebar-logo-text strong {
+  display: block;
+
+  font-size: 20px;
+  line-height: 1.1;
+
+  color: #17172a;
+
+  letter-spacing: -0.5px;
+}
+
+.sidebar-logo-text span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+
+  color: #8b8ba5;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.sidebar-nav {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+
+/* Navigation item */
+
+.sidebar-link {
+  width: 100%;
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 11px 14px;
+
+  border: none;
+  border-radius: 14px;
+
+  box-sizing: border-box;
+
+  background: transparent;
+
+  color: #53536c;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+
+  text-align: left;
+
+  text-decoration: none;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    padding 0.3s ease,
+    gap 0.3s ease,
+    transform 0.2s ease;
+}
+
+
+/* Hover */
+
+.sidebar-link:hover {
+  background:
+    rgba(255, 255, 255, 0.48);
+
+  color: var(--purple-dark);
+}
+
+
+/* Active */
+
+.sidebar-link.active {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(167, 139, 250, 0.25),
+      rgba(139, 92, 246, 0.14)
+    );
+
+  color: #5b3fd0;
+
+  box-shadow:
+    inset 3px 0 0 #8064e8;
+}
+
+
+/* Icons */
+
+.sidebar-link .sidebar-icon {
+  flex-shrink: 0;
+
+  width: 22px;
+  min-width: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 17px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.2s ease;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.sidebar-footer {
+  width: 100%;
+
+  margin-top: auto;
+
+  padding-top: 20px;
+
+  border-top:
+    1px solid rgba(120, 100, 180, 0.10);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+
+/* Version */
+
+.sidebar-version {
+  padding:
+    14px 14px 0;
+
+  color: var(--text-muted);
+
+  font-size: 10px;
+
+  line-height: 1.6;
+
+  white-space: nowrap;
+
+  opacity: 1;
+
+  transition:
+    opacity 0.2s ease;
+}
+
+
+/* Logout */
+
+.sidebar-logout {
+  font-family: inherit;
+}
+
+
+/* =========================================================
+   COLLAPSED SIDEBAR
+   ========================================================= */
+
+.sidebar.sidebar-collapsed {
+  width: 76px;
+  min-width: 76px;
+
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+/* Main content when collapsed */
+
+.sidebar.sidebar-collapsed ~ .app-main {
+  margin-left: 76px;
+  width: calc(100% - 76px);
+}
+
+
+/* =========================================================
+   COLLAPSED LOGO
+   ========================================================= */
+
+.sidebar.sidebar-collapsed
+.sidebar-logo-wrapper {
+  justify-content: center;
+
+  margin-bottom: 42px;
+}
+
+
+.sidebar.sidebar-collapsed
+.sidebar-logo-text {
+  width: 0;
+  max-width: 0;
+
+  opacity: 0;
+
+  overflow: hidden;
+}
+
+
+/* Keep icon centered */
+
+.sidebar.sidebar-collapsed
+.sidebar-logo-button {
+  width: 46px;
+  min-width: 46px;
+}
+
+
+/* =========================================================
+   COLLAPSED NAVIGATION
+   ========================================================= */
+
+.sidebar.sidebar-collapsed
+.sidebar-link {
+  justify-content: center;
+
+  padding-left: 0;
+  padding-right: 0;
+
+  gap: 0;
+}
+
+
+/* Hide text */
+
+.sidebar.sidebar-collapsed
+.sidebar-link > span:not(.sidebar-icon) {
+  width: 0;
+
+  opacity: 0;
+
+  overflow: hidden;
+}
+
+
+/* Center icons */
+
+.sidebar.sidebar-collapsed
+.sidebar-link .sidebar-icon {
+  width: 24px;
+  min-width: 24px;
+}
+
+
+/* Remove active left line in collapsed mode */
+
+.sidebar.sidebar-collapsed
+.sidebar-link.active {
+  box-shadow: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(167, 139, 250, 0.25),
+      rgba(139, 92, 246, 0.14)
+    );
+}
+
+
+/* =========================================================
+   COLLAPSED FOOTER
+   ========================================================= */
+
+.sidebar.sidebar-collapsed
+.sidebar-version {
+  opacity: 0;
+
+  visibility: hidden;
+
+  height: 0;
+
+  padding: 0;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   OLD TOGGLE - DISABLE
+   ========================================================= */
+
+.sidebar-toggle {
+  display: none !important;
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 901px) {
+
+  .sidebar {
+    width: 250px;
+    min-width: 250px;
+  }
+
+  .sidebar.sidebar-collapsed {
+    width: 76px;
+    min-width: 76px;
+  }
+
+  .app-main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
+
+  .sidebar.sidebar-collapsed ~ .app-main {
+    margin-left: 76px;
+    width: calc(100% - 76px);
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) and (min-width: 651px) {
+
+  .sidebar {
+    width: 76px;
+    min-width: 76px;
+
+    padding:
+      25px 10px;
+  }
+
+  .sidebar-logo-wrapper {
+    justify-content: center;
+  }
+
+  .sidebar-logo-text {
+    width: 0;
+    max-width: 0;
+
+    opacity: 0;
+
+    overflow: hidden;
+  }
+
+  .sidebar-link {
+    justify-content: center;
+
+    padding-left: 0;
+    padding-right: 0;
+
+    gap: 0;
+  }
+
+  .sidebar-link > span:not(.sidebar-icon) {
+    width: 0;
+
+    opacity: 0;
+
+    overflow: hidden;
+  }
+
+  .sidebar-link .sidebar-icon {
+    width: 24px;
+    min-width: 24px;
+  }
+
+  .sidebar-footer {
+    padding-top: 15px;
+  }
+
+  .sidebar-version {
+    display: none;
+  }
+
+  .app-main {
+    margin-left: 76px;
+    width: calc(100% - 76px);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .sidebar {
+    display: none;
+  }
+
+  .app-main {
+    margin-left: 0;
+    width: 100%;
+  }
+}

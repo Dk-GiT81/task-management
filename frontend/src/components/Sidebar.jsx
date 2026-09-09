@@ -1,157 +1,136 @@
-import {
-  BarChart3,
-  CheckSquare,
-  FolderKanban,
-  LayoutDashboard,
-  LogOut,
-  Settings,
-  User,
-  Users,
-} from "lucide-react";
-
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-
 
 function Sidebar() {
-  
+  const [collapsed, setCollapsed] = useState(false);
   const { logout } = useAuth();
 
-  const navigate = useNavigate();
-
-
-  function handleLogout() {
-   logout();
-
-   navigate("/login");
-  }
-
-  const mainNavigation = [
+  const navItems = [
     {
-      name: "Dashboard",
-      path: "/dashboard",
-      icon: LayoutDashboard,
+      to: "/dashboard",
+      label: "Dashboard",
+      icon: "▦",
     },
     {
-      name: "My Tasks",
-      path: "/tasks",
-      icon: CheckSquare,
+      to: "/tasks",
+      label: "My Tasks",
+      icon: "☑",
     },
     {
-      name: "Projects",
-      path: "/projects",
-      icon: FolderKanban,
+      to: "/projects",
+      label: "Projects",
+      icon: "▣",
     },
     {
-      name: "Team",
-      path: "/team",
-      icon: Users,
+      to: "/team",
+      label: "Team",
+      icon: "♧",
     },
     {
-      name: "Analytics",
-      path: "/analytics",
-      icon: BarChart3,
+      to: "/analytics",
+      label: "Analytics",
+      icon: "▥",
     },
     {
-      name: "Profile",
-      path: "/profile",
-      icon: User,
+      to: "/profile",
+      label: "Profile",
+      icon: "♙",
     },
   ];
 
-
   return (
-    <aside className="sidebar">
-
-      {/* Logo */}
-      <div className="sidebar-logo">
-
-        <div className="logo-icon">
-          <CheckSquare size={23} />
-        </div>
-
-        <div>
-          <h2>TaskFlow</h2>
-
-          <p>
-            Manage · Organize · Achieve
-          </p>
-        </div>
-
-      </div>
-
-
-      {/* Main Navigation */}
-      <nav className="sidebar-navigation">
-
-        {mainNavigation.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) =>
-                `sidebar-link ${
-                  isActive ? "active" : ""
-                }`
-              }
-            >
-              <Icon size={20} />
-
-              <span>
-                {item.name}
-              </span>
-            </NavLink>
-          );
-        })}
-
-      </nav>
-
-
-      {/* Bottom Navigation */}
-      <div className="sidebar-bottom">
-
-        <NavLink
-          to="/settings"
-          className={({ isActive }) =>
-            `sidebar-link ${
-              isActive ? "active" : ""
-            }`
+    <aside
+      className={`sidebar ${
+        collapsed ? "sidebar-collapsed" : ""
+      }`}
+    >
+      {/* Logo / Sidebar Toggle */}
+      <div className="sidebar-logo-wrapper">
+        <button
+          type="button"
+          className="sidebar-logo-button"
+          onClick={() => setCollapsed(!collapsed)}
+          aria-label={
+            collapsed
+              ? "Expand sidebar"
+              : "Collapse sidebar"
+          }
+          title={
+            collapsed
+              ? "Expand sidebar"
+              : "Collapse sidebar"
           }
         >
-          <Settings size={20} />
-
-          <span>
-            Settings
-          </span>
-        </NavLink>
-
-
-        <button
-          className="sidebar-link logout-button"
-          onClick={handleLogout}
-        >
-          <LogOut size={20} />
-
-          <span>
-            Logout
-          </span>
+          <img
+            src="/taskflow_icon.png"
+            alt="TaskFlow"
+            className="sidebar-logo-icon"
+          />
         </button>
 
+        <div className="sidebar-logo-text">
+          <strong>TaskFlow</strong>
+          <span>Manage · Organize · Achieve</span>
+        </div>
       </div>
 
+      {/* Navigation */}
+      <nav className="sidebar-nav">
+        {navItems.map((item) => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            className="sidebar-link"
+            title={collapsed ? item.label : undefined}
+            aria-label={item.label}
+          >
+            <span className="sidebar-icon">
+              {item.icon}
+            </span>
 
-      {/* Version */}
+            <span>{item.label}</span>
+          </NavLink>
+        ))}
+      </nav>
+
+      {/* Footer */}
       <div className="sidebar-footer">
-        <p>Version 1.0.0</p>
-        <p>© 2026 TaskFlow</p>
-      </div>
+        <NavLink
+          to="/settings"
+          className="sidebar-link"
+          title={collapsed ? "Settings" : undefined}
+          aria-label="Settings"
+        >
+          <span className="sidebar-icon">
+            ⚙
+          </span>
 
+          <span>Settings</span>
+        </NavLink>
+
+        <button
+          type="button"
+          className="sidebar-link sidebar-logout"
+          onClick={logout}
+          title={collapsed ? "Logout" : undefined}
+          aria-label="Logout"
+        >
+          <span className="sidebar-icon">
+            →
+          </span>
+
+          <span>Logout</span>
+        </button>
+
+        <div className="sidebar-version">
+          Version 1.0.0
+          <br />
+          © 2026 TaskFlow
+        </div>
+      </div>
     </aside>
   );
 }
-
 
 export default Sidebar;
